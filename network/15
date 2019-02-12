@@ -1,0 +1,3 @@
+Adding a line like :
+46.19.122.85    intra.42.fr into the file /etc/hosts, we indicate to the system that the ip 46.19.122.82 matchs the url intra.42.fr.
+it means that if you request intra.42.fr the system will ask 46.19.122.85.

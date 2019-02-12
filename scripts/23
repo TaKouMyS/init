@@ -1,0 +1,9 @@
+to connect your new user, on a terminal, type:
+su - username
+with username replaced by the username you just created.
+It will ask for username's password.
+you are done.
+
+Graphically, you have to log off or just lock your session to reach the user
+selection page.
+Select the user you just created, enter password, you are done

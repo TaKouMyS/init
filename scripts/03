@@ -1,0 +1,2 @@
+hotname cmd changes the hostname only until next reboot, to modify your hostname you need to edit the following file : 
+/etc/hostname
