@@ -65,3 +65,6 @@ S01networking
 S01procps
 S01udev
 S01x11-common
+
+Obtain with : ls /etc/rc*.d
+Thoses are daemons

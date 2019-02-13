@@ -1,2 +1,1 @@
-/etc/resolv.conf
-to check
+The system resolve IP's via DNS address stored in : /etc/resolv.conf

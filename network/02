@@ -1,5 +1,5 @@
-a : 
+#a :
 ifconfig | grep broadcast | cut -d ' ' -f 6
 
-b :
+#b :
 ifconfig | grep broadcast | cut -d ' ' -f 2,6

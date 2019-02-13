@@ -1,1 +1,2 @@
-whois slash16.org | grep "Registrar URL:" | cut -d ' ' -f 3
+While traceroute, we can observe that packets go through AWS servers,
+we can assume then that slash16.org is hosted by Amazon.

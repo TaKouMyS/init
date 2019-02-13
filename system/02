@@ -1,1 +1,1 @@
-hostname system_name
+sudo hostname system_name

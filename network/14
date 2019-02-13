@@ -1,1 +1,2 @@
-/etc/hosts
+For locale name resolution, the system goes into /etc/hosts
+to resolve names.

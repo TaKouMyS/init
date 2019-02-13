@@ -1,2 +1,4 @@
-/etc/ssh/ssh_host_rsa_key
-not sure, to confirm
+We stored authorized rsa keys for ssh connections into the user's directory.
+Each user can store rsa keys. If a computer comes with one of those rsa Keys,
+it will automatly connect it as the matching user.
+~/.ssh/authorized_keys
