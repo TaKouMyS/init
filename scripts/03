@@ -1,1 +1,4 @@
 #!/usr/bin/env bash
+echo "SSH's installation :\n<------------------>\n"
+#echo apt install -y ssh > logs
+echo "\nSSH OK\n<------------------>"
