@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
 SUDO_USER=$(cat /etc/passwd | grep "/home" | sed "s/:.*//g" | head -1)
 printf "Sudo's Installation \n <----------->\n" | tee init_debian.log
-apt-get install sudo >> init_debian.log
-printf "Done! Confguration...\n" | tee init_debian.log
+printf Working...
+echo "test" > init_debian.log
+#apt-get install sudo >> init_debian.log
+printf "Done! Confguration...\n" | tee -a init_debian.log
 adduser $SUDO_USER sudo >> init_debian.log
 printf "Done!\n"
-printf "SSH's Installation \n <----------->\n" | tee init_debian.log
-atp-get install openssh-server
+printf "SSH's Installation \n <----------->\n"
+#atp-get install openssh-server
 printf "Done!\n"
