@@ -45,8 +45,8 @@ is_sudo()
   fi
 }
 
-RED='\e[0;31m'
-NC='\e[0m' # No Color
+RED='\033[0;31m'
+NC='\033[0m' # No Color
 
 sudo()
 {
@@ -55,7 +55,7 @@ sudo()
   printf "Done! Confguration..." | tee -a init_debian.log
   adduser $SUDO_USER sudo 1>> init_debian.log
   printf "\nSudo has been installed!\n"
-  echo "$RED Sudo Configuration NEED RESTART to get effective, don't forget that point ;)$NC"
+  printf "$RED Sudo Configuration NEED RESTART to get effective, don't forget that point ;)$NC"
   echo "teub"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
