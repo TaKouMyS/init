@@ -5,7 +5,7 @@ is_vim()
   printf "<----- Vim's Installation ------>\n" | tee -a init_debian.log
   if [ -e /usr/bin/vim ]
   then
-    printf "Vim seem already installed, do you want to proceed?\n(it might update the actual installation)\nY or n ?\nYour choice : "
+    printf "Vim seems already installed, do you want to proceed?\n(it might update the actual installation)\nY or n ?\nYour choice : "
     read choice
     if [ $choice == 'Y' ] || [ $choice == 'y' ]
     then
@@ -32,7 +32,7 @@ is_sudo()
   printf "<----- Sudo Installation ------>\n" | tee -a init_debian.log
   if [ -e /usr/bin/sudo ]
   then
-    printf "SUDO seem already installed, do you want to proceed?\n(We will add $SUDO_USER to the list of SUDO users and it might update the actual installation)\nY or n ?\nYour choice : "
+    printf "SUDO seems already installed, do you want to proceed?\n(We will add $SUDO_USER to the list of SUDO users and it might update the actual installation)\nY or n ?\nYour choice : "
     read choice
     if [ $choice == 'Y' ] || [ $choice == 'y' ]
     then
@@ -56,7 +56,6 @@ sudo()
   adduser $SUDO_USER sudo 1>> init_debian.log
   printf "\nSudo has been installed!\n"
   printf "$RED Sudo Configuration NEED RESTART to get effective, don't forget that point ;)$NC"
-  echo "teub"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
@@ -65,7 +64,7 @@ is_ssh()
   printf "<----- SSH's Installation ------>\n" | tee -a init_debian.log
   if [ -e /run/sshd.pid ]
   then
-    printf "SSH server seem already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
+    printf "SSH server seems already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
     read choice
     if [ $choice == 'Y' ] || [ $choice == 'y' ]
     then
@@ -91,7 +90,7 @@ is_git()
   printf "<----- Git's Installation ------>\n" | tee -a init_debian.log
   if [ -e /usr/bin/git ]
   then
-    printf "Git seem already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
+    printf "Git seems already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
     read choice
     if [ $choice == 'Y' ] || [ $choice == 'y' ]
     then
@@ -117,7 +116,7 @@ is_zsh()
   printf "<----- ZSH's Installation ------>\n" | tee -a init_debian.log
   if [ -e /usr/bin/ZSH ]
   then
-    printf "zsh seem already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
+    printf "zsh seems already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
     read choice
     if [ $choice == 'Y' ] || [ $choice == 'y' ]
     then
@@ -208,7 +207,7 @@ then
 else
   touch init_debian.log
 fi
-printf "Hello there!\nAvailable softwares : Sudo, SSH, Vim  & ZSH\n1) Install everything\n2) Something else\n"
+printf "Hello there!\nAvailable softwares : Sudo, SSH, Vim, Git & ZSH + OM_ZSH\n1) Install everything\n2) Something else\n"
 printf "All installation will apt-get update and apt-get upgrade\nYour choice : "
 read choice
 case $choice in
