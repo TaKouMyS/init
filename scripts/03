@@ -20,6 +20,7 @@ is_vim()
 
 vim()
 {
+  printf "Working..."
   apt-get install vim 1>> init_debian.log
   printf "syntax on\nset number\nset mouse:a\n" 1>> ~/.vimrc
   printf "Vim has been installed!\n"
@@ -50,7 +51,7 @@ sudo()
   apt-get install sudo 1>> init_debian.log
   printf "Done! Confguration...\n" | tee -a init_debian.log
   adduser $SUDO_USER sudo 1>> init_debian.log
-  printf "Done!\n"
+  printf "Sudo has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
@@ -74,8 +75,9 @@ is_ssh()
 
 ssh()
 {
+  printf "Working..."
   apt-get install openssh-server 1>> init_debian.log
-  printf "Done!\n"
+  printf "SSH has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
@@ -99,24 +101,27 @@ is_git()
 
 git()
 {
+  printf "Working..."
   apt-get install git 1>> init_debian.log
-  printf "Done!\n"
+  printf "Git has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
 update()
 {
   printf "<----- apt-get update ------>\n" | tee -a init_debian.log
+  printf "Working..."
   apt-get update 1>> init_debian.log
-  printf "Done!\n"
+  printf "\nDone!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
 upgrade()
 {
   printf "<----- apt-get upgrade ------>\n" | tee -a init_debian.log
+  printf "Working..."
   apt-get upgrade 1>> init_debian.log
-  printf "Done!\n"
+  printf "\nDone!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
@@ -157,7 +162,7 @@ remove()
   delgroup sudo 1>> init_debian.log
   apt-get remove -y openssh-server 1>> init_debian.log
   apt-get remove -y git 1>> init_debian.log
-  printf "Done!\n"
+  printf "\nDone!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
