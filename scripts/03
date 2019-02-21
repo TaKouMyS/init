@@ -23,7 +23,7 @@ vim()
   printf "Working..."
   apt-get install vim 1>> init_debian.log
   printf "syntax on\nset number\nset mouse:a\n" 1>> ~/.vimrc
-  printf "Vim has been installed!\n"
+  printf "\nVim has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
@@ -49,9 +49,9 @@ sudo()
 {
   printf "Working..."
   apt-get install sudo 1>> init_debian.log
-  printf "Done! Confguration...\n" | tee -a init_debian.log
+  printf "Done! Confguration..." | tee -a init_debian.log
   adduser $SUDO_USER sudo 1>> init_debian.log
-  printf "Sudo has been installed!\n"
+  printf "\nSudo has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
@@ -77,7 +77,7 @@ ssh()
 {
   printf "Working..."
   apt-get install openssh-server 1>> init_debian.log
-  printf "SSH has been installed!\n"
+  printf "\nSSH has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
@@ -107,6 +107,33 @@ git()
   printf "<----------->\n\n" | tee -a init_debian.log
 }
 
+is_zsh()
+{
+  printf "<----- ZSH's Installation ------>\n" | tee -a init_debian.log
+  if [ -e /usr/bin/ZSH ]
+  then
+    printf "zsh seem already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
+    read choice
+    if [ $choice == 'Y' ] || [ $choice == 'y' ]
+    then
+      zsh
+    else
+      printf "ZSH installation has been canceled\n<----------->\n\n" | tee -a init_debian.log
+    fi
+  else
+    zsh
+  fi
+}
+
+zsh()
+{
+  sh -c "$(curl -fssL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  printf "Working..."
+  apt-get install zsh 1>> init_debian.log
+  printf "\nZSH has been installed!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
 update()
 {
   printf "<----- apt-get update ------>\n" | tee -a init_debian.log
@@ -128,7 +155,7 @@ upgrade()
 something_else()
 {
         printf "\n<----- Something else! ----->\n"
-  printf "1) Vim?\n2) Sudo?\n3) SSH server?\n4) Git\n5) Remove all\n6) Nothing, just quit!\nYour choice : "
+  printf "1) Vim?\n2) Sudo?\n3) SSH server?\n4) Git?\n5) ZSH + OM_ZSH?\n6) Remove all?\n7) Nothing, just quit!\nYour choice : "
   read choice
   case $choice in
       "1")
@@ -144,9 +171,13 @@ something_else()
         is_git
       ;;
       "5")
+        is_zsh
+      ;;
+
+      "6")
         remove
       ;;
-      "6")
+      "7")
         exit
       ;;
   esac
@@ -180,6 +211,7 @@ case $choice in
       printf "Everything!\n"
       update
       upgrade
+      is_zsh
       is_vim
       is_sudo
       is_ssh
