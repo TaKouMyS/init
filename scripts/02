@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
-skill -KILL -u $1
-deluser --remove-home $1
+printf "User to delog and remove : "
+read choice
+skill -KILL -u $choice
+deluser --remove-home $choice
