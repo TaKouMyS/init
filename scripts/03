@@ -1,12 +1,186 @@
 #!/usr/bin/env bash
 SUDO_USER=$(cat /etc/passwd | grep "/home" | sed "s/:.*//g" | head -1)
-printf "Sudo's Installation \n <----------->\n" | tee init_debian.log
-printf Working...
-echo "test" > init_debian.log
-#apt-get install sudo >> init_debian.log
-printf "Done! Confguration...\n" | tee -a init_debian.log
-adduser $SUDO_USER sudo >> init_debian.log
-printf "Done!\n"
-printf "SSH's Installation \n <----------->\n"
-#atp-get install openssh-server
-printf "Done!\n"
+is_vim()
+{
+  printf "<----- Vim's Installation ------>\n" | tee -a init_debian.log
+  if [ -e /usr/bin/vim ]
+  then
+    printf "Vim seem already installed, do you want to proceed?\n(it might update the actual installation)\nY or n ?\nYour choice : "
+    read choice
+    if [ $choice == 'Y' ] || [ $choice == 'y' ]
+    then
+      vim
+    else
+      printf "Vim's intallation canceled\n<----------->\n\n" | tee -a init_debian.log
+    fi
+  else
+    vim
+  fi
+}
+
+vim()
+{
+  apt-get install vim 1>> init_debian.log
+  printf "syntax on\nset number\nset mouse:a\n" 1>> ~/.vimrc
+  printf "Vim has been installed!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
+is_sudo()
+{
+  printf "<----- Sudo Installation ------>\n" | tee -a init_debian.log
+  if [ -e /usr/bin/sudo ]
+  then
+    printf "SUDO seem already installed, do you want to proceed?\n(We will add $SUDO_USER to the list of SUDO users and it might update the actual installation)\nY or n ?\nYour choice : "
+    read choice
+    if [ $choice == 'Y' ] || [ $choice == 'y' ]
+    then
+      sudo
+    else
+      printf "Sudo installation has been canceled\n<----------->\n\n" | tee -a init_debian.log
+    fi
+  else
+    sudo
+  fi
+}
+
+sudo()
+{
+  printf "Working..."
+  apt-get install sudo 1>> init_debian.log
+  printf "Done! Confguration...\n" | tee -a init_debian.log
+  adduser $SUDO_USER sudo 1>> init_debian.log
+  printf "Done!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
+is_ssh()
+{
+  printf "<----- SSH's Installation ------>\n" | tee -a init_debian.log
+  if [ -e /run/sshd.pid ]
+  then
+    printf "SSH server seem already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
+    read choice
+    if [ $choice == 'Y' ] || [ $choice == 'y' ]
+    then
+      ssh
+    else
+      printf "SSH installation has been canceled\n<----------->\n\n" | tee -a init_debian.log
+    fi
+  else
+    ssh
+  fi
+}
+
+ssh()
+{
+  apt-get install openssh-server 1>> init_debian.log
+  printf "Done!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
+is_git()
+{
+  printf "<----- Git's Installation ------>\n" | tee -a init_debian.log
+  if [ -e /usr/bin/git ]
+  then
+    printf "Git seem already installed, do you want to proceed?\n(It might update the actual installation)\nY or n ?\nYour choice : "
+    read choice
+    if [ $choice == 'Y' ] || [ $choice == 'y' ]
+    then
+      git
+    else
+      printf "Git installation has been canceled\n<----------->\n\n" | tee -a init_debian.log
+    fi
+  else
+    git
+  fi
+}
+
+git()
+{
+  apt-get install git 1>> init_debian.log
+  printf "Done!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
+update()
+{
+  printf "<----- apt-get update ------>\n" | tee -a init_debian.log
+  apt-get update 1>> init_debian.log
+  printf "Done!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
+upgrade()
+{
+  printf "<----- apt-get upgrade ------>\n" | tee -a init_debian.log
+  apt-get upgrade 1>> init_debian.log
+  printf "Done!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
+something_else()
+{
+        printf "\n<----- Something else! ----->\n"
+  printf "1) Vim?\n2) Sudo?\n3) SSH server?\n4) Git\n5) Remove all\n6) Nothing, just quit!\nYour choice : "
+  read choice
+  case $choice in
+      "1")
+        is_vim
+      ;;
+      "2")
+        is_sudo
+      ;;
+      "3")
+        is_ssh
+      ;;
+      "4")
+        is_git
+      ;;
+      "5")
+        remove
+      ;;
+      "6")
+        exit
+      ;;
+  esac
+  something_else
+}
+
+remove()
+{
+  printf "<----- Remove All ----->\n" | tee -a init_debian.log
+  printf "Working...\n"
+  apt-get remove  -y vim 1>> init_debian.log
+  apt-get remove -y sudo 1>> init_debian.log
+  delgroup sudo 1>> init_debian.log
+  apt-get remove -y openssh-server 1>> init_debian.log
+  apt-get remove -y git 1>> init_debian.log
+  printf "Done!\n"
+  printf "<----------->\n\n" | tee -a init_debian.log
+}
+
+if [ -e ./init_debian.log ]
+then
+  rm -f init_debian.log
+else
+  touch init_debian.log
+fi
+printf "Hello there!\nAvailable softwares : Sudo, SSH, Vim  & ZSH\n1) Install everything\n2) Something else\n"
+printf "All installation will apt-get update and apt-get upgrade\nYour choice : "
+read choice
+case $choice in
+    "1")
+      printf "Everything!\n"
+      update
+      upgrade
+      is_vim
+      is_sudo
+      is_ssh
+      is_git
+      ;;
+    "2")
+      something_else
+      ;;
+    esac
