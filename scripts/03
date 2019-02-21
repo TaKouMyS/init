@@ -55,7 +55,7 @@ sudo()
   printf "Done! Confguration..." | tee -a init_debian.log
   adduser $SUDO_USER sudo 1>> init_debian.log
   printf "\nSudo has been installed!\n"
-  echo "$REDSudo Configuration NEED RESTART to get effective, don't forget that point ;)$NC"
+  echo "$RED Sudo Configuration NEED RESTART to get effective, don't forget that point ;)$NC"
   echo "teub"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
@@ -143,7 +143,7 @@ update()
 {
   printf "<----- apt-get update ------>\n" | tee -a init_debian.log
   printf "Working..."
-  apt-get update 1>> init_debian.log
+  apt-get update -y 1>> init_debian.log
   printf "\nDone!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
@@ -152,7 +152,7 @@ upgrade()
 {
   printf "<----- apt-get upgrade ------>\n" | tee -a init_debian.log
   printf "Working..."
-  apt-get upgrade 1>> init_debian.log
+  apt-get upgrade -y 1>> init_debian.log
   printf "\nDone!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
