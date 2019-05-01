@@ -21,7 +21,7 @@ is_vim()
 vim()
 {
   printf "Working..."
-  apt-get install vim 1>> init_debian.log
+  apt-get install -y vim 1>> init_debian.log
   printf "syntax on\nset number\nset mouse:a\n" 1>> ~/.vimrc
   printf "\nVim has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
@@ -51,7 +51,7 @@ NC='\033[0m' # No Color
 sudo()
 {
   printf "Working..."
-  apt-get install sudo 1>> init_debian.log
+  apt-get install -y sudo 1>> init_debian.log
   printf "Done! Confguration..." | tee -a init_debian.log
   adduser $SUDO_USER sudo 1>> init_debian.log
   printf "\nSudo has been installed!\n"
@@ -80,7 +80,7 @@ is_ssh()
 ssh()
 {
   printf "Working..."
-  apt-get install openssh-server 1>> init_debian.log
+  apt-get install -y openssh-server 1>> init_debian.log
   printf "\nSSH has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
@@ -106,7 +106,7 @@ is_git()
 git()
 {
   printf "Working..."
-  apt-get install git 1>> init_debian.log
+  apt-get install -y git 1>> init_debian.log
   printf "Git has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
@@ -131,9 +131,10 @@ is_zsh()
 
 zsh()
 {
+  apt-get install -y zsh 1>> init_debian.log
+  apt-get install -y curl 1>> init_debian.log
   sh -c "$(curl -fssL https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
   printf "Working..."
-  apt-get install zsh 1>> init_debian.log
   printf "\nZSH has been installed!\n"
   printf "<----------->\n\n" | tee -a init_debian.log
 }
